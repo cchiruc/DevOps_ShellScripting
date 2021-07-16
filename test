@@ -1,1 +1,8 @@
-this is sample file
+#!/bin/bash
+LOG=/tmp/reboshop.log
+echo -e "installting nginx \t\t.."
+yum install  nginx -y >>$LOG
+echo "Enabling Nginx"
+systemctl enable nginx >>$LOG
+echo  "Starting Nginx"
+systemctl start nginx >>$LOG
