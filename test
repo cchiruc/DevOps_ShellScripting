@@ -1,8 +1,10 @@
 #!/bin/bash
 LOG=/tmp/reboshop.log
-echo -e "installting nginx \t\t.."
-yum install  nginx -y >>$LOG
+echo -e "installing nginx \t\t.."
+sudo yum install  nginx -y >>$LOG
 echo "Enabling Nginx"
-systemctl enable nginx >>$LOG
+sudo systemctl enable nginx >>$LOG
 echo  "Starting Nginx"
-systemctl start nginx >>$LOG
+sudo  systemctl start nginx >>$LOG
+echo  "status Nginx"
+sudo systemctl status nginx
