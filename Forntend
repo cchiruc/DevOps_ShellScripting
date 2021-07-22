@@ -3,3 +3,8 @@ LOG=/tmp/devops
 Echo "Nginx installation"
 yum install nginx -y >>$LOG
 
+echo "download images"
+curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+cd /usr/share/nginx/html && rm -rf *  && unzip /tmp/frontend.zip && mv frontend-main/* . && mv static/* .
+rm -rf frontend-master static && mv localhost.conf /etc/nginx/default.d/roboshop.conf
+systemctl restart nginx
