@@ -1,0 +1,10 @@
+#!/bin/bash
+echo " Redis installation /t"
+yum install epel-release yum-utils -y
+yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
+yum-config-manager --enable remi
+echo $?
+
+echo "Redis service configuration /t"
+yum install redis -y && systemctl enable redis && systemctl start redis
+echo $?
