@@ -8,3 +8,4 @@ echo $?
 echo "Redis service configuration /t"
 yum install redis -y && systemctl enable redis && systemctl start redis
 echo $?
+
