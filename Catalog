@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "install catalogue \t"
+echo "installing  catalogue \t"
 yum install nodejs make gcc-c++ -y
 echo $
 
