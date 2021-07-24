@@ -6,6 +6,7 @@ LOG=/tmp/roboshop.log
 
 Echo "Nginx installation \t"
 yum install nginx -y >>$LOG
+STAT_CHECK $?
 
 echo "download images"
 curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
