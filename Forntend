@@ -4,14 +4,14 @@
 LOG=/tmp/roboshoplog
 
 echo "installation of nginx"
-yum install nginx -y
+yum install nginx -y >>$LOG
 if [ $? = 0 ];then
       echo "nginx installtion completed\t" >>$LOG
 	  echo "download webpage images"
 	  curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
 	  if [ $? = 0 ];then
-        cd /usr/share/nginx/html && rm -rf *  && unzip /tmp/frontend.zip && mv frontend-main/* . && mv static/* .
-	    rm -rf frontend-master static && mv localhost.conf /etc/nginx/default.d/roboshop.conf && systemctl restart nginx
+        cd /usr/share/nginx/html && rm -rf *  && unzip -o /tmp/frontend.zip && mv frontend-main/* . && mv static/* .
+	      rm -rf frontend-master static && mv localhost.conf /etc/nginx/default.d/roboshop.conf && systemctl restart nginx
 	  else
 	    echo "download web pages failed"
 	    exit 1
