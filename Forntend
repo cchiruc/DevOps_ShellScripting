@@ -1,21 +1,24 @@
 #!/bin/bash
 
-source common.sh
+[ ! -f /tmp/roboshoploglog ] && tocuch /tmp/roboshoplog
+LOG=/tmp/roboshoplog
 
-LOG=/tmp/roboshop.log
-
-Echo "Nginx installation \t"
-yum install nginx -y >>$LOG
-STAT_CHECK $?
-
-echo "download images"
-curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
-STAT_CHECK $?
-
-cd /usr/share/nginx/html && rm -rf *  && unzip /tmp/frontend.zip && mv frontend-main/* . && mv static/* .
-rm -rf frontend-master static && mv localhost.conf /etc/nginx/default.d/roboshop.conf
-systemctl restart nginx
-STAT_CHECK $?
+echo "installation of nginx"
+yum install nginx -y
+if [ $? = 0 ];then
+      echo "nginx installtion completed\t" >>$LOG
+	  echo "download webpage images"
+	  curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip"
+	  if [ $? = 0 ];then
+        cd /usr/share/nginx/html && rm -rf *  && unzip /tmp/frontend.zip && mv frontend-main/* . && mv static/* .
+	    rm -rf frontend-master static && mv localhost.conf /etc/nginx/default.d/roboshop.conf && systemctl restart nginx
+	  else
+	    echo "download web pages failed"
+	    exit 1
+	  fi
+else "installation of nginx failed"
+exit 1
+fi
 
 
 
