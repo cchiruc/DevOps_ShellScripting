@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ ! -f /tmp/roboshoploglog ] && tocuch /tmp/roboshoplog
+[ ! -f /tmp/roboshoploglog ] && touch /tmp/roboshoplog
 LOG=/tmp/roboshoplog
 
 echo "installation of nginx"
